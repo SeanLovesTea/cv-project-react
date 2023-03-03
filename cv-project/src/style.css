@@ -1,0 +1,21 @@
+.container {
+  border: 1px solid grey;
+  padding: 0 1rem 3rem 1rem;
+  margin:2rem;
+}
+.preview--header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.line-seperator {
+  height: 1rem;
+  background-color: bisque;
+  border-radius: 4px;
+  margin:2rem 0;
+}
+
+.prev--title {
+  display: flex;
+  justify-content: space-between;
+}
