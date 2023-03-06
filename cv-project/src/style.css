@@ -7,6 +7,9 @@
   display: flex;
   justify-content: space-between;
 }
+.preview--header-right {
+  text-align: end;
+}
 
 .line-seperator {
   height: 1rem;
