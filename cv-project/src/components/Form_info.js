@@ -4,6 +4,7 @@ const Form_info = (props) => {
   
   const { info, infoArray, handleChange, onSubmitTask} = props
   console.log(infoArray , "============== inside info comp")
+  const targetObj = infoArray.length - 1
   return (
     <div>
     <form id="info">
@@ -36,21 +37,47 @@ const Form_info = (props) => {
           onChange={handleChange}
           name="phoneNumber"
            />
+          <input 
+          placeholder="location"
+          value={info.location}
+          type="text" 
+          onChange={handleChange}
+          name="location"
+           />
+          <input 
+          placeholder="Profession"
+          value={info.job}
+          type="text" 
+          onChange={handleChange}
+          name="job"
+           />
+          <textarea 
+          placeholder="Personal statement"
+          value={info.statement}
+          type="text" 
+          onChange={handleChange}
+          name="statement"
+           />
           <button 
           onClick={(e) => onSubmitTask(e, "info", "infoArray")}
           type="submit"
           >Add Task</button>
         </form>
 
-    <ul>
-      {infoArray.map(item => {
-        return <li key={item.id}>
-          First name:{item.firstName} <br></br>  
-          Last name:{item.lastName} <br></br>  
-          Email:{item.email} <br></br> 
-          Phone No.{item.phoneNumber} <br></br></li>
-      })}
-    </ul>
+     
+    {infoArray[0] && 
+      <ul>
+          <li key={infoArray[targetObj].id}>
+          First name : {infoArray[targetObj].firstName} <br></br>  
+          Last name : {infoArray[targetObj].lastName} <br></br>  
+          Email : {infoArray[targetObj].email} <br></br> 
+          Phone No : {infoArray[targetObj].phoneNumber} <br></br>
+          Location : {infoArray[targetObj].location} <br></br>
+          Job : {infoArray[targetObj].job} <br></br>
+          Statement : {infoArray[targetObj].statement} <br></br>
+          </li>
+      
+    </ul>}
     </div>
   )
 }

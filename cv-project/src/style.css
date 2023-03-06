@@ -1,24 +1,36 @@
 .container {
   border: 1px solid grey;
-  padding: 0 1rem 3rem 1rem;
+  padding: 1rem;
   margin:2rem;
 }
 .preview--header {
   display: flex;
   justify-content: space-between;
 }
-.preview--header-right {
+.right-align{
   text-align: end;
 }
 
-.line-seperator {
+.divider {
   height: 1rem;
   background-color: bisque;
   border-radius: 4px;
   margin:2rem 0;
 }
+.preview--section .section--item{
+  border: 1px solid grey;
+  padding: .5rem;
+  margin: 1rem;
+}
 
-.prev--title {
+.split-content {
   display: flex;
   justify-content: space-between;
+}
+
+.section-title {
+  display: flex;
+}
+.margin-right {
+  margin-right: 10px;
 }
