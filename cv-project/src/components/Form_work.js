@@ -1,15 +1,16 @@
 import React from 'react'
 
 const Form_work = (props) => {
-  const { work, workArray, handleChange, onSubmitTask } = props
   
+  const { work, workArray, handleChange, onSubmitTask ,onClickDelete } = props
+
   return (
-    <div>
+    <div className='form-section'>
       <form id="work">
           <label htmlFor="taskInput">Work</label>
           <input 
           placeholder="Company name"
-          value={work.schoolName}
+          value={work.companyName}
           type="text" 
           onChange={handleChange}
           name="companyName"
@@ -38,18 +39,32 @@ const Form_work = (props) => {
           <button 
           onClick={(e) => onSubmitTask(e, "work", "workArray")}
           type="submit"
-          >Add Task</button>
+          id='add'
+          >Add</button>
         </form>
-    <ul>
+    
       {workArray.map(item => {
-        return <li key={item.id}>
-        Name: {item.companyName}  <br></br> 
-        Title: {item.title}  <br></br> 
-        Tasks: {item.tasks}  <br></br> 
-        Dates: {item.dates}
-        </li>
+        return (
+        <div>
+        <ul key={item.id} >
+          <li >Company Name: {item.companyName} </li>
+          <li >Title: {item.title} </li> 
+          <li >Tasks: {item.tasks} </li>
+          <li >Dates: {item.dates} </li>
+        </ul>
+        <div 
+          className='button-delete' 
+          data_id={item.id}        
+          data_name="workArray">
+
+          <button onClick={onClickDelete} id='del'>Delete</button>
+          <button id='edit'>Edit</button>
+
+        </div>
+      </div>
+        )
       })}
-    </ul>
+   
     </div>
   )
 }
