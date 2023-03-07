@@ -3,6 +3,38 @@
   padding: 1rem;
   margin:2rem;
 }
+.form-section {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+#info, #education, #work {
+  display: flex;
+  flex-direction: column;
+}
+#info > input, #education > input, #work > input {
+  margin: .5rem 0;
+}
+
+ul > li{
+  padding: .5rem;
+}
+.button-delete{
+  text-align: end;
+}
+.button-delete > button {
+  margin: .5rem;
+}
+#add {
+  margin-top: 1rem;
+  background-color: rgb(169, 233, 169);
+}
+#del {
+  background-color: rgb(240, 140, 140);
+}
+#edit {
+  background-color: rgb(233, 233, 172);
+}
 .preview--header {
   display: flex;
   justify-content: space-between;

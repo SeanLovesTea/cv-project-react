@@ -76,29 +76,44 @@ class App extends React.Component {
         location: "",
         job: "",
         statement: "",
+        companyName: "",
       },
     })
     
   }
-
+  onClickDelete = (e) => {
+    e.preventDefault()
+    const id = e.target.parentNode.getAttribute("data_id")
+    const name = e.target.parentNode.getAttribute("data_name")
+    const filteredItem = this.state[name].findIndex(item => item.id === id)
+    const deleteItem = this.state[name].splice(filteredItem, 1)
+    // console.log(filteredItem, "f====filtered item")
+    this.setState(deleteItem)
+  }
+  onClickEdit = (e) => {
+    e.preventDefault()
+    
+  }
   
   render () {
     const { info, education, work, infoArray, educationArray, workArray} = this.state
     return (
       <div>
-        
+  
         <Form_info 
         info={info}
         infoArray={infoArray} 
         handleChange={this.handleChange}
         onSubmitTask={this.onSubmitTask}
+        onClickDelete={this.onClickDelete}
         />
-
+        
         <Form_ed 
         education={education}
         educationArray={educationArray}
         handleChange={this.handleChange}
         onSubmitTask={this.onSubmitTask}
+        onClickDelete={this.onClickDelete}
         />
 
         <Form_work 
@@ -106,6 +121,7 @@ class App extends React.Component {
         workArray={workArray}
         handleChange={this.handleChange}
         onSubmitTask={this.onSubmitTask}
+        onClickDelete={this.onClickDelete}
         />
 
         <Preview 

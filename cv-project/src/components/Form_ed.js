@@ -1,10 +1,10 @@
 import React from 'react'
 
 const Form_ed = (props) => {
-  const { education,educationArray, handleChange, onSubmitTask } = props
+  const { education,educationArray, handleChange, onSubmitTask, onClickDelete } = props
   
   return (
-    <div>
+    <div className='form-section'>
       <form id="education">
           <label htmlFor="taskInput">Education</label>
           <input 
@@ -31,17 +31,31 @@ const Form_ed = (props) => {
           <button 
           onClick={(e) => onSubmitTask(e, "education", "educationArray")}
           type="submit"
-          >Add Task</button>
+          id='add'
+          >Add </button>
         </form>
-    <ul>
+    
       {educationArray.map(item => {
-        return <li key={item.id}>
-          Name: {item.schoolName}  <br></br> 
-          Title: {item.title}  <br></br> 
-          Dates: {item.dates}
-          </li>
-      })}
-    </ul>
+        return (
+          <div>
+            <ul key={item.id}>
+              <li>School Name: {item.schoolName}</li>  
+              <li>itle: {item.title}</li>  
+              <li>Dates: {item.dates}</li>
+            </ul>
+
+            <div 
+              className='button-delete' 
+              data_id={item.id}        
+              data_name="educationArray">
+
+              <button onClick={onClickDelete} id='del'>Delete</button>
+              <button id='edit'>Edit</button>
+
+            </div>
+          </div>
+        )
+        })}
     </div>
   )
 }

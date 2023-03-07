@@ -3,12 +3,11 @@ import React from 'react'
 const Preview = (props) => {
  
     const { info, infoArray, educationArray, workArray } = props
-    console.log(JSON.stringify(infoArray[0]) + " ===+++++===+++ inside preview")
     const targetObj = infoArray.length - 1
     const targetData = infoArray[targetObj]
+    
     return (
       <div>
-        Hi
         <div className='container'>
           
           <div className='preview--header'>
@@ -36,10 +35,10 @@ const Preview = (props) => {
               <div  key={item.id} className='section--item'>
                 <div className='split-content'>
                   <div>
-                    <h6>{item.companyName}</h6>
+                    <h6>{item.title}</h6>
                   </div>
                   <div className='section-title'>
-                    <h6 className='margin-right'>{item.title} |</h6>
+                    <h6 className='margin-right'>{item.companyName} |</h6>
                     <h6>{item.dates}</h6>
                   </div>
                 </div>
@@ -69,29 +68,19 @@ const Preview = (props) => {
             <h3>Education</h3>
 
             {educationArray.map(item => {
-              return  <div key={item.id} className='section--item'>
-              <div className='split-content'>
-                <div>
-                  <h6>{item.title}</h6>
+              return  (
+              <div key={item.id} className='section--item'>
+                <div className='split-content'>
+                  <div>
+                    <h6>{item.title}</h6>
+                  </div>
+                  <div className='section-title'>
+                    <h6 className='margin-right'>{item.schoolName} | </h6>
+                    <h6>{item.dates}</h6>
+                  </div>
                 </div>
-                <div className='section-title'>
-                  <h6 className='margin-right'>{item.schoolName} | </h6>
-                  <h6>{item.dates}</h6>
-                </div>
-              </div>
-            </div>
+              </div>)
             })}
-            {/* <div className='section--item'>
-              <div className='split-content'>
-                <div>
-                  <h6>2D Game Development with Unity</h6>
-                </div>
-                <div className='section-title'>
-                  <h6 className='margin-right'>Udemy    |</h6>
-                  <h6>2019-2020</h6>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
