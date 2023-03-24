@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Overview from './components/Overview'
+import Overview from './InputPage/Overview/Overview'
 import {nanoid} from "nanoid";
 import Education from './components/Education';
 import EduInput from './InputPage/EduInput'
@@ -18,7 +18,6 @@ class App extends Component {
       },
       eduArray: [],
     }
-    
   }
   handleChange = (e) => {
     const {name, value} = e.target
@@ -48,6 +47,8 @@ class App extends Component {
   handleEdit = (e) => {
     const sectionsArray = this.state.eduArray
     const targetId = e.target.parentNode.id
+    console.log(targetId, "====targetid=====")
+    console.log(e.target.parentNode.parentNode, "====e=====")
     const targetTaskIndex = sectionsArray.findIndex(task => task.id === targetId)
     const targetTask = sectionsArray[targetTaskIndex]
 
@@ -66,8 +67,11 @@ class App extends Component {
   moveUpDown= (e, direction) => {
     const sectionsArray = this.state.eduArray
     const targetId = e.target.parentNode.id
-    const targetTaskIndex = sectionsArray.findIndex(task => task.id === targetId)
-
+    const targetTaskIndex = sectionsArray.findIndex(item => item.id === targetId)
+    console.log(sectionsArray, "====sectionarray====")
+    console.log(targetTaskIndex, "====argetTaskIndex====")
+    console.log(targetId, "====stargetId====")
+    console.log(e.target.parentNode.id, "====id====")
     let startIndex = targetTaskIndex
     const element = sectionsArray[startIndex];
     sectionsArray.splice(startIndex, 1);
@@ -79,25 +83,29 @@ class App extends Component {
   render() {
     
     const { eduSection, eduArray } = this.state
-    console.log(eduArray)
 
     return (
-      <div>
-        <EduInput 
-        eduSection={eduSection} 
-        handleChange={this.handleChange}
-        onSubmit={this.onSubmit}
-        />
-        <Education 
-        tasks={eduArray} 
-        handleChange={this.handleChange}
-        />
-        <Overview 
-        tasks={eduArray} 
-        handleEdit={this.handleEdit}
-        moveUpDown={this.moveUpDown}
-         />
-        <Preview eduArray={eduArray}/>
+      <div className='main'>
+        <div className='input-page'>
+          <div className='input-container'>
+            <EduInput 
+              eduSection={eduSection} 
+              handleChange={this.handleChange}
+              onSubmit={this.onSubmit}
+              />
+          </div>
+          <div className='input-overview'>
+            <Overview 
+              eduArray={eduArray} 
+              handleEdit={this.handleEdit}
+              moveUpDown={this.moveUpDown}
+              />
+          </div>
+        </div>
+        <div className='preview-page'> 
+          <Preview eduArray={eduArray}
+          />
+        </div>
       </div>
     )
   }

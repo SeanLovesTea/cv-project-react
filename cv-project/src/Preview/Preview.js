@@ -21,7 +21,8 @@ export default class Preview extends Component {
             <div>{item.schoolTitle}</div>
             <div>{item.schoolDates}</div>
           </section>
-        </div>)}
+        </div>
+        )}
       </div>
       
     )
