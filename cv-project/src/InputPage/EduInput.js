@@ -16,14 +16,14 @@ export default class EduInput extends Component {
       type="text" 
       id="schoolNameInput"
       name="schoolName"
-      onChange={handleChange}
+      onChange={(e) => handleChange(e, 'edu')}
       placeholder="School Name"
       />
       <input 
       value={eduSection.schoolTitle}
       type="text" 
       id="schoolTitleInput"
-      onChange={handleChange}
+      onChange={(e) => handleChange(e, 'edu')}
       name="schoolTitle"
       placeholder="Course Title"
       />
@@ -31,12 +31,12 @@ export default class EduInput extends Component {
       value={eduSection.schoolDates}
       type="text" 
       id="schoolDatesInput"
-      onChange={handleChange}
+      onChange={(e) => handleChange(e, 'edu')}
       name="schoolDates"
       placeholder="Course Dates"
       />
       <button 
-      onClick={onSubmit}
+      onClick={(e) => onSubmit(e, 'edu')}
       type="submit"
       >Add</button>
    </form>

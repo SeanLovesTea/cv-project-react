@@ -18,7 +18,7 @@ export default class EduOver extends Component {
               <li>School Name : {item.schoolName}</li>
               <li>Course Title : {item.schoolTitle}</li>
               <li>Course Dates : {item.schoolDates}</li>
-              <button onClick={handleEdit}> Edit </button>
+              <button onClick={(e) => handleEdit(e, 'edu')}> Edit </button>
               <button onClick={(e) => moveUpDown(e, 'up')}> up</button>
               <button onClick={(e) => moveUpDown(e, 'down')}> down </button>
             </ul> 
@@ -28,14 +28,3 @@ export default class EduOver extends Component {
     )
   }
 }
-{/* <BsArrowUp/>
-<BsArrowDown/> */}
-// {eduArray.map(item => 
-//   <div key={item.id}>
-//     <section>
-//       <div>{item.schoolName}</div>
-//       <div>{item.schoolTitle}</div>
-//       <div>{item.schoolDates}</div>
-//     </section>
-//   </div>
-//   )}
