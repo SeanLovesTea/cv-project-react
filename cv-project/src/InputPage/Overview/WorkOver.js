@@ -18,8 +18,8 @@ export default class WorkOver extends Component {
               <li>Main Tasks : {item.mainTasks}</li>
               <li>Work Dates : {item.workDates}</li>
               <button onClick={(e) => handleEdit(e, 'work')}> Edit </button>
-              <button onClick={(e) => moveUpDown(e, 'up')}> up</button>
-              <button onClick={(e) => moveUpDown(e, 'down')}> down </button>
+              <button onClick={(e) => moveUpDown(e, 'up', 'work')}> up</button>
+              <button onClick={(e) => moveUpDown(e, 'down', 'work')}> down </button>
             </ul> 
         </div>)
         })}

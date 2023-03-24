@@ -19,8 +19,8 @@ export default class EduOver extends Component {
               <li>Course Title : {item.schoolTitle}</li>
               <li>Course Dates : {item.schoolDates}</li>
               <button onClick={(e) => handleEdit(e, 'edu')}> Edit </button>
-              <button onClick={(e) => moveUpDown(e, 'up')}> up</button>
-              <button onClick={(e) => moveUpDown(e, 'down')}> down </button>
+              <button onClick={(e) => moveUpDown(e, 'up', 'edu')}> up</button>
+              <button onClick={(e) => moveUpDown(e, 'down', 'edu')}> down </button>
             </ul> 
         </div>)
         })}

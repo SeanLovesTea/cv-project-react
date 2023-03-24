@@ -93,7 +93,7 @@ class App extends Component {
         workSection : {
           ...this.state.workSection,
           companyName : targetTask.companyName,
-          posisitionTitle : targetTask.posisitionTitle,
+          positionTitle : targetTask.posisitionTitle,
           mainTasks : targetTask.mainTasks,
           workDates : targetTask.workDates,
           id: this.state.workSection.id
@@ -103,8 +103,10 @@ class App extends Component {
     sectionsArray.splice(targetTaskIndex, 1)
   }
 
-  moveUpDown= (e, direction) => {
-    const sectionsArray = this.state.eduArray
+  moveUpDown= (e, direction, sectionName) => {
+    const sectionsArray = sectionName === 'edu' ? 
+    this.state.eduArray : this.state.workArray
+    
     const targetId = e.target.parentNode.id
     const targetTaskIndex = sectionsArray.findIndex(item => item.id === targetId)
     console.log(sectionsArray, "====sectionarray====")
