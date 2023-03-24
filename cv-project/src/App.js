@@ -1,139 +1,106 @@
-import React from "react"
-import {nanoid} from 'nanoid'
-import Form_info from "./components/Form_info"
-import Form_ed from "./components/Form_ed"
-import Form_work from "./components/Form_work"
-import Preview from "./components/Preview"
+import React, { Component } from 'react'
+import Overview from './components/Overview'
+import {nanoid} from "nanoid";
+import Education from './components/Education';
+import EduInput from './InputPage/EduInput'
+import Preview from './Preview/Preview';
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super()
 
     this.state = {
-      info: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        location: "",
-        job: "",
+      eduSection: {
+        schoolName: '',
+        schoolTitle: '',
+        schoolDates: '',
         id: nanoid()
       },
-      education: {
-        schoolName: "",
-        title: "",
-        dates: "",
-        id: nanoid()
-      },
-      work: {
-        companyName: "",
-        title: "",
-        tasks: "",
-        dates: "",
-        id: nanoid()
-      },
-      infoArray : [{
-        firstName: "John",
-        lastName: "Doe",
-        email: "abc@123.com",
-        phoneNumber: "086 123 456",
-        location: "Glasgow, Uk",
-        job: "Software Developer",
-        statement:"Cupidatat sunt anim incididunt nisi labore sunt nulla Lorem elit irure. Aliquip quis excepteur et nostrud enim irure nostrud officia. Et deserunt et aliquip voluptate elit cupidatat. Adipisicing enim minim do anim eiusmod est. Irure laboris anim voluptate proident. Cillum reprehenderit est magna minim. Nostrud ex aute laborum ea irure amet ea ipsum ut non minim anim nisi 234.",
-        id: nanoid()
-      }],
-      educationArray: [],
-      workArray: []
+      eduArray: [],
     }
-
+    
   }
   handleChange = (e) => {
-    const section = e.target.parentNode.id
-    const { name , value} = e.target
-    this.setState(prev => ({
-      [section] : {
-        ...prev[section],
+    const {name, value} = e.target
+    this.setState({
+      eduSection : {
+        ...this.state.eduSection,
         [name] : value,
-        id: this.state[section].id
+        id: this.state.eduSection.id
       }
-    }))
+    })
   }
-  
-  onSubmitTask = (e, section, sectionArray) => {
+ 
+  onSubmit = (e) => {
     e.preventDefault()
     this.setState({
-      [sectionArray]: this.state[sectionArray].concat(this.state[section]),
-      [section]: { 
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
+      eduArray: this.state.eduArray.concat(this.state.eduSection),
+      eduSection: { 
+        schoolName: '',
+        schoolTitle: '',
+        schoolDates: '',
         id: nanoid(),
-        schoolName: "",
-        title: "",
-        dates: "",
-        tasks: "",
-        location: "",
-        job: "",
-        statement: "",
-        companyName: "",
-      },
+      }
     })
-    
-  }
-  onClickDelete = (e) => {
-    e.preventDefault()
-    const id = e.target.parentNode.getAttribute("data_id")
-    const name = e.target.parentNode.getAttribute("data_name")
-    const filteredItem = this.state[name].findIndex(item => item.id === id)
-    const deleteItem = this.state[name].splice(filteredItem, 1)
-    // console.log(filteredItem, "f====filtered item")
-    this.setState(deleteItem)
-  }
-  onClickEdit = (e) => {
-    e.preventDefault()
-    
+    console.log(this.state.eduArray)
   }
   
-  render () {
-    const { info, education, work, infoArray, educationArray, workArray} = this.state
+  handleEdit = (e) => {
+    const sectionsArray = this.state.eduArray
+    const targetId = e.target.parentNode.id
+    const targetTaskIndex = sectionsArray.findIndex(task => task.id === targetId)
+    const targetTask = sectionsArray[targetTaskIndex]
+
+    this.setState({
+      eduSection : {
+        ...this.state.eduSection,
+        schoolName : targetTask.schoolName,
+        schoolTitle : targetTask.schoolTitle,
+        schoolDates : targetTask.schoolDates,
+        id: this.state.eduSection.id
+      }
+    })
+    sectionsArray.splice(targetTaskIndex, 1)
+  }
+
+  moveUpDown= (e, direction) => {
+    const sectionsArray = this.state.eduArray
+    const targetId = e.target.parentNode.id
+    const targetTaskIndex = sectionsArray.findIndex(task => task.id === targetId)
+
+    let startIndex = targetTaskIndex
+    const element = sectionsArray[startIndex];
+    sectionsArray.splice(startIndex, 1);
+    startIndex = direction === 'up' ? (startIndex + 1) : (startIndex - 1)
+    sectionsArray.splice(startIndex, 0, element)
+    this.setState(sectionsArray)
+  }
+
+  render() {
+    
+    const { eduSection, eduArray } = this.state
+    console.log(eduArray)
+
     return (
       <div>
-  
-        <Form_info 
-        info={info}
-        infoArray={infoArray} 
+        <EduInput 
+        eduSection={eduSection} 
         handleChange={this.handleChange}
-        onSubmitTask={this.onSubmitTask}
-        onClickDelete={this.onClickDelete}
+        onSubmit={this.onSubmit}
         />
-        
-        <Form_ed 
-        education={education}
-        educationArray={educationArray}
+        <Education 
+        tasks={eduArray} 
         handleChange={this.handleChange}
-        onSubmitTask={this.onSubmitTask}
-        onClickDelete={this.onClickDelete}
         />
-
-        <Form_work 
-        work={work}
-        workArray={workArray}
-        handleChange={this.handleChange}
-        onSubmitTask={this.onSubmitTask}
-        onClickDelete={this.onClickDelete}
-        />
-
-        <Preview 
-        info={info}
-        infoArray={infoArray} 
-        educationArray={educationArray}
-        workArray={workArray}
-
-        />
-
+        <Overview 
+        tasks={eduArray} 
+        handleEdit={this.handleEdit}
+        moveUpDown={this.moveUpDown}
+         />
+        <Preview eduArray={eduArray}/>
       </div>
     )
   }
 }
+
 export default App

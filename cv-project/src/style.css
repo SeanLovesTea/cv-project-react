@@ -1,68 +1,36 @@
-.container {
-  border: 1px solid grey;
-  padding: 1rem;
-  margin:2rem;
-}
-.form-section {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
-#info, #education, #work {
-  display: flex;
-  flex-direction: column;
-}
-#info > input, #education > input, #work > input {
+h1,h2,h3,h4 {
   margin: .5rem 0;
 }
 
-ul > li{
-  padding: .5rem;
-}
-.button-delete{
-  text-align: end;
-}
-.button-delete > button {
-  margin: .5rem;
-}
-#add {
-  margin-top: 1rem;
-  background-color: rgb(169, 233, 169);
-}
-#del {
-  background-color: rgb(240, 140, 140);
-}
-#edit {
-  background-color: rgb(233, 233, 172);
+.container{
+  margin: 2rem 0;
+  padding: 2rem;
+  box-shadow: 0px 3px 7px grey;
 }
 .preview--header {
   display: flex;
   justify-content: space-between;
 }
-.right-align{
+
+.sidebar > div, .left-section > *, .right-section > *   {
+  margin:.5rem;
+}
+.sidebar > div, .right-section > *   {
   text-align: end;
 }
 
 .divider {
-  height: 1rem;
-  background-color: bisque;
-  border-radius: 4px;
-  margin:2rem 0;
-}
-.preview--section .section--item{
-  border: 1px solid grey;
-  padding: .5rem;
-  margin: 1rem;
+  border: .25rem solid grey;
+  border-radius: 6px;
+  width:100%;
 }
 
-.split-content {
+.preview--section {
+  padding:1rem;
+}
+
+.main-section {
   display: flex;
   justify-content: space-between;
 }
 
-.section-title {
-  display: flex;
-}
-.margin-right {
-  margin-right: 10px;
-}
