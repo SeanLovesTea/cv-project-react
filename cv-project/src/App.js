@@ -65,19 +65,15 @@ class App extends Component {
         }
       })
     }
-    console.log(this.state.eduArray)
   }
   
   handleEdit = (e, sectionName) => {
     const sectionsArray = sectionName === 'edu' ? 
     this.state.eduArray : this.state.workArray
-
-    console.log(sectionsArray)
     const targetId = e.target.parentNode.id
-    console.log(targetId, "====targetid=====")
-    console.log(e.target.parentNode.parentNode, "====e=====")
     const targetTaskIndex = sectionsArray.findIndex(task => task.id === targetId)
     const targetTask = sectionsArray[targetTaskIndex]
+
     if(sectionName === 'edu'){
       this.setState({
         eduSection : {
@@ -93,7 +89,7 @@ class App extends Component {
         workSection : {
           ...this.state.workSection,
           companyName : targetTask.companyName,
-          positionTitle : targetTask.posisitionTitle,
+          positionTitle : targetTask.positionTitle,
           mainTasks : targetTask.mainTasks,
           workDates : targetTask.workDates,
           id: this.state.workSection.id
@@ -103,21 +99,30 @@ class App extends Component {
     sectionsArray.splice(targetTaskIndex, 1)
   }
 
+  handleDelete = (e, sectionName) => {
+    const sectionsArray = sectionName === 'edu' ? 
+    this.state.eduArray : this.state.workArray
+    console.log(sectionsArray, "====thisstea=====")
+    
+    const targetId = e.target.parentNode.id
+    const targetTaskIndex = sectionsArray.findIndex(task => task.id === targetId)
+    
+    sectionsArray.splice(targetTaskIndex, 1)
+    this.setState(sectionsArray)
+  }
+
   moveUpDown= (e, direction, sectionName) => {
     const sectionsArray = sectionName === 'edu' ? 
     this.state.eduArray : this.state.workArray
-    
     const targetId = e.target.parentNode.id
     const targetTaskIndex = sectionsArray.findIndex(item => item.id === targetId)
-    console.log(sectionsArray, "====sectionarray====")
-    console.log(targetTaskIndex, "====argetTaskIndex====")
-    console.log(targetId, "====stargetId====")
-    console.log(e.target.parentNode.id, "====id====")
+
     let startIndex = targetTaskIndex
     const element = sectionsArray[startIndex];
     sectionsArray.splice(startIndex, 1);
     startIndex = direction === 'up' ? (startIndex + 1) : (startIndex - 1)
     sectionsArray.splice(startIndex, 0, element)
+    
     this.setState(sectionsArray)
   }
 
@@ -146,6 +151,7 @@ class App extends Component {
               workArray={workArray}
               handleEdit={this.handleEdit}
               moveUpDown={this.moveUpDown}
+              handleDelete={this.handleDelete}
               />
           </div>
         </div>

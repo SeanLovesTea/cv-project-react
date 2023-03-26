@@ -6,11 +6,12 @@ export default class WorkOver extends Component {
     console.log(props)
   }
   render() {
-    const { workArray, moveUpDown, handleEdit } = this.props
+    const { workArray, moveUpDown, handleEdit, handleDelete } = this.props
     return (
       <div>
          {workArray.map(item => {
-          return (<div key={item.id}>
+          return (
+          <div key={item.id}>
             <label>Work </label>
             <ul id={item.id}>
               <li>Company Name : {item.companyName}</li>
@@ -18,8 +19,9 @@ export default class WorkOver extends Component {
               <li>Main Tasks : {item.mainTasks}</li>
               <li>Work Dates : {item.workDates}</li>
               <button onClick={(e) => handleEdit(e, 'work')}> Edit </button>
-              <button onClick={(e) => moveUpDown(e, 'up', 'work')}> up</button>
-              <button onClick={(e) => moveUpDown(e, 'down', 'work')}> down </button>
+              <button onClick={(e) => moveUpDown(e, 'up', 'work')}> Up</button>
+              <button onClick={(e) => moveUpDown(e, 'down', 'work')}> Down </button>
+              <button onClick={(e) => handleDelete(e, 'work')}> Delete </button>
             </ul> 
         </div>)
         })}
@@ -27,14 +29,3 @@ export default class WorkOver extends Component {
     )
   }
 }
-{/* <BsArrowUp/>
-<BsArrowDown/> */}
-// {eduArray.map(item => 
-//   <div key={item.id}>
-//     <section>
-//       <div>{item.schoolName}</div>
-//       <div>{item.schoolTitle}</div>
-//       <div>{item.schoolDates}</div>
-//     </section>
-//   </div>
-//   )}
