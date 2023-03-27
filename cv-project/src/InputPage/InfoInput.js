@@ -1,12 +1,12 @@
 import { React, Component } from "react"
 
-export default class EduInput extends Component {
+export default class InfoInput extends Component {
   constructor(props){
     super(props)
   }
  render() {
 
-  const {eduSection: infoSection, handleChange, onSubmit} = this.props
+  const {infoSection, handleChange, onSubmit, infoArray} = this.props
 
    return (
      <form>
@@ -35,10 +35,18 @@ export default class EduInput extends Component {
       name="phoneNumber"
       placeholder="Phone Number"
       />
+      <textarea
+      value={infoSection.statement}
+      type="text" 
+      id="statementInput"
+      onChange={(e) => handleChange(e, 'info')}
+      name="statement"
+      placeholder="Personal Statement"
+      />
       <button 
       onClick={(e) => onSubmit(e, 'info')}
       type="submit"
-      >Add</button>
+      >{infoArray.length > 0 ? "Replace" : "Add"}</button>
    </form>
    )
  }

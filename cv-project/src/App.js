@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Overview from './InputPage/Overview/Overview'
+import Overview from './Overview/Overview'
 import {nanoid} from "nanoid";
-import Education from './components/Education';
 import EduInput from './InputPage/EduInput'
 import WorkInput from './InputPage/WorkInput'
+import InfoInput from './InputPage/InfoInput'
 import Preview from './Preview/Preview';
 
 class App extends Component {
@@ -11,6 +11,15 @@ class App extends Component {
     super()
 
     this.state = {
+      infoSection: {
+        fulllName: '',
+        email: '',
+        phoneNumber: '',
+        statement: '',
+        id: nanoid()
+      },
+      infoArray: [],
+
       eduSection: {
         schoolName: '',
         schoolTitle: '',
@@ -39,6 +48,7 @@ class App extends Component {
         id: this.state[section].id
       }
     })
+    console.log(this.state.infoArray, "====infoarray====")
   }
  
   onSubmit = (e, sectionName) => {
@@ -53,7 +63,8 @@ class App extends Component {
           id: nanoid(),
         }
       })
-    }else if(sectionName === 'work'){
+    }
+    if(sectionName === 'work'){
       this.setState({
         workArray: this.state.workArray.concat(this.state.workSection),
         workSection: { 
@@ -65,11 +76,28 @@ class App extends Component {
         }
       })
     }
+    if(sectionName === 'info'){
+      if(this.state.infoArray.length > 0) {
+        this.state.infoArray.splice(0, 1)
+      }
+      this.setState({
+        infoArray: this.state.infoArray.concat(this.state.infoSection),
+        infoSection: { 
+          fullName: '',
+          email: '',
+          phoneNumber: '',
+          statement: '',
+          id: nanoid(),
+        }
+      })
+    }
   }
   
   handleEdit = (e, sectionName) => {
-    const sectionsArray = sectionName === 'edu' ? 
-    this.state.eduArray : this.state.workArray
+    const sectionsArray = 
+    sectionName === 'edu' ? this.state.eduArray : 
+    sectionName === 'work' ? this.state.workArray :
+    this.state.infoArray
     const targetId = e.target.parentNode.id
     const targetTaskIndex = sectionsArray.findIndex(task => task.id === targetId)
     const targetTask = sectionsArray[targetTaskIndex]
@@ -84,7 +112,8 @@ class App extends Component {
           id: this.state.eduSection.id
         }
       })
-    }else if(sectionName === 'work'){
+    }
+    if(sectionName === 'work'){
       this.setState({
         workSection : {
           ...this.state.workSection,
@@ -96,12 +125,27 @@ class App extends Component {
         }
       })
     }
+    if(sectionName === 'info'){
+      this.setState({
+        infoSection : {
+          ...this.state.infoSection,
+          fullName : targetTask.fullName,
+          email : targetTask.email,
+          phoneNumber : targetTask.phoneNumber,
+          statement : targetTask.statement,
+          id: this.state.infoSection.id
+        }
+      })
+    }
     sectionsArray.splice(targetTaskIndex, 1)
   }
 
   handleDelete = (e, sectionName) => {
-    const sectionsArray = sectionName === 'edu' ? 
-    this.state.eduArray : this.state.workArray
+    const sectionsArray = 
+    sectionName === 'edu' ? this.state.eduArray : 
+    sectionName === 'work' ? this.state.workArray :
+    this.state.infoArray
+
     console.log(sectionsArray, "====thisstea=====")
     
     const targetId = e.target.parentNode.id
@@ -122,18 +166,24 @@ class App extends Component {
     sectionsArray.splice(startIndex, 1);
     startIndex = direction === 'up' ? (startIndex + 1) : (startIndex - 1)
     sectionsArray.splice(startIndex, 0, element)
-    
+
     this.setState(sectionsArray)
   }
 
   render() {
     
-    const { eduSection, eduArray, workSection, workArray } = this.state
+    const { eduSection, eduArray, workSection, workArray, infoSection, infoArray } = this.state
 
     return (
       <div className='main'>
         <div className='input-page'>
           <div className='input-container'>
+            <InfoInput 
+              infoSection={infoSection} 
+              infoArray={infoArray}
+              handleChange={this.handleChange}
+              onSubmit={this.onSubmit}
+              />
             <EduInput 
               eduSection={eduSection} 
               handleChange={this.handleChange}
@@ -149,6 +199,7 @@ class App extends Component {
             <Overview 
               eduArray={eduArray} 
               workArray={workArray}
+              infoArray={infoArray}
               handleEdit={this.handleEdit}
               moveUpDown={this.moveUpDown}
               handleDelete={this.handleDelete}
@@ -156,7 +207,10 @@ class App extends Component {
           </div>
         </div>
         <div className='preview-page'> 
-          <Preview eduArray={eduArray}
+          <Preview 
+          eduArray={eduArray}
+          workArray={workArray}
+          infoArray={infoArray}
           />
 
         </div>
