@@ -145,8 +145,6 @@ class App extends Component {
     sectionName === 'edu' ? this.state.eduArray : 
     sectionName === 'work' ? this.state.workArray :
     this.state.infoArray
-
-    console.log(sectionsArray, "====thisstea=====")
     
     const targetId = e.target.parentNode.id
     const targetTaskIndex = sectionsArray.findIndex(task => task.id === targetId)
@@ -208,10 +206,10 @@ class App extends Component {
         </div>
         <div className='preview-page'> 
           <Preview 
-          eduArray={eduArray}
-          workArray={workArray}
-          infoArray={infoArray}
-          />
+            eduArray={eduArray}
+            workArray={workArray}
+            infoArray={infoArray}
+            />
 
         </div>
       </div>

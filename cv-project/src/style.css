@@ -1,7 +1,7 @@
 .main {
   padding: 1rem;
 }
-.input-page {
+.input-page, .preview-page {
   padding: 1rem;
   border: 1px solid grey;
 }
@@ -14,11 +14,25 @@ form {
 form > * {
   margin:.25rem;
 }
-.input-overview {
+.input-overview  {
   display: flex;
   padding: 1rem;
   border: 1px rgb(135, 158, 222) solid
 }
 section {
   padding: 1rem;
+}
+.border-line {
+  margin: 1rem 0;
+  border: 1px rgb(135, 158, 222) solid
+}
+header, .section-row {
+  display: flex;
+  justify-content: space-between;
+}
+.section-class{
+  box-shadow: 1px 3px 9px rgb(197, 197, 197);
+}
+.row {
+  display: flex;
 }
